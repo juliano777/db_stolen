@@ -65,14 +65,16 @@ DBUSER=${DBUSER:='postgres'}
 SQL_FILE=${SQL_FILE:='/tmp/test.sql'}
 CLIENTS=${CLIENTS:='1'}
 TRANSACTIONS=${TRANSACTIONS:='10'}
-START=${START:='now()'}
-END=${END:='now()'}
+START=${START:=`date '+%Y-%m-%d %H:%M'`}
+END=${END:=`date '+%Y-%m-%d %H:%M'`}
 
 # ============================================================================
 
-SQL="CALL sp_random_transfer(\
+SQL="CALL sp_random_transfer(
 	${ACCOUNT_TYPE},
-	fc_random_timestamp(${START}, ${END}));"
+	fc_random_timestamp(
+		'${START}'::timestamp without time zone,
+		'${END}'::timestamp without time zone));"
 
 echo ${SQL} > ${SQL_FILE}
 

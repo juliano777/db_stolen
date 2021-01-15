@@ -75,7 +75,7 @@ CREATE OR REPLACE PROCEDURE sp_transfer (
     source_ int,
     destiny_ int,
     value_ numeric(15, 2),
-	dt timestamp default now()
+	dt timestamp with time zone default now()
     ) AS $body$
     
     BEGIN
@@ -113,7 +113,7 @@ CREATE OR REPLACE PROCEDURE sp_random_transfer () AS $body$
 
 
 -- Procedure para realizar transferências aleatórias de um determinado tipo de conta
-CREATE OR REPLACE PROCEDURE sp_random_transfer (account_type int, dt timestamp) AS $body$
+CREATE OR REPLACE PROCEDURE sp_random_transfer (account_type int, dt timestamp with time zone) AS $body$
     DECLARE
             source_ int;
             destiny_ int;
