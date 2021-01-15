@@ -1,0 +1,31 @@
+1. Parametrização do PostgreSQL
+
+O PostgreSQL vem por padrão configurado com parâmetros de performance básicos, que permitem que o SGBD execute em praticamente qualquer configuração de hardware e S.O. Tendo em vista as necessidades de negócio e performance impostas pelo desafio e considerando-se que este será um ambiente produtivo, indicar qual a configuração de parâmetros ideal a fim de proporcionar tanto performance quanto segurança dos dados através de Point In Time Recovery.
+
+Você pode escolher a versão do postgres que se sentir mais confortável.
+
+listen_addresses = '*'  # ou mudar especificamente para um ou determados IPs
+shared_buffers = < aproximadamente 25% da memória RAM >
+huge_pages = on  # É preciso fazer procedimentos no sistema operacional
+max_connections = < o menor número possível, aconselhável usar um pool de conexões como o pgbouncer por exemplo >
+maintenance_work_mem = < aproximadamente 10% da memória RAM, recomendável que seja muito maior que work_mem > 
+password_encryption = scram-sha-256
+work_mem = < memória RAM * 0.25 / max_connections >
+max_stack_depth = < aproximadamente 80% de ulimit -s >
+effective_cache_size = < 75% da memória RAM >
+max_parallel_workers_per_gather = < quantidade de CPUs da máquina + 1 >
+commit_siblings = 
+wal_writer_flush_after = 16MB
+checkpoint_completion_target = < aproximadamente 0.85 >
+checkpoint_flush_after = 256kB
+max_wal_size = 1GB
+min_wal_size = 80MB
+default_statistics_target = 
+
+
+autovacuum_max_workers = 
+
+
+archive_mode = on
+archive_command = 'rsync %p maq-destino:/diretorio/%f'
+wal_level = replica

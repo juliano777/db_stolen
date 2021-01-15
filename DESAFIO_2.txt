@@ -1,0 +1,43 @@
+2. Implementar solução para realizar transferências financeiras entre contas com alto volume de concorrência.
+
+Transferência é a retirada de saldo disponível de uma conta para outra sem que a conta de origem fique negativa.
+
+Criar um modelo de dados que suporte:
+
+- 70% das contas (tipo 1) fazendo de 1 a 3 transferências concorrentes da mesma para outras contas.
+
+- 30% das contas (tipo 2) fazendo milhares de transferências concorrentes da mesma para outras contas.
+
+- A consulta de saldo precisa estar disponível em tempo real.
+
+- Alta vazão de operações concorrentes por minuto.
+
+Restrições:
+
+- Nenhuma conta pode ficar com saldo negativo.
+
+- As transações precisam ocorrer dentro de uma janela de tempo de 11 horas.
+
+- Os benchmarks precisam iniciar com a base já contendo 2 milhões de operações distribuídas entre as contas de tipo 1 e 2.
+
+Entregáveis:
+
+- Validações de consistências das transações.
+
+- Modelagem do banco, index, procedures, views ou qualquer outra coisa que fizer sentido para a solução do problema.
+
+- Um benchmark mostrando a quantidade de transações concorrentes por segundo que o sistema suporta para os 2 tipos de contas propostas.
+
+- Um benchmark mostrando o volume máximo que o sistema suporta, dentro da janela de operação, para os 2 tipos de conta.
+
+- Documentação da Etapa 1, mostrando e explicando porque foi usado cada parâmetro e sua parametrização
+
+- Documentação da Etapa 2, explicando a solução, o setup do ambiente para replicação, listagem das ferramentas e fontes de consultas utilizadas no desafio.
+
+
+Quando tiver concluído peço que me envie a solução para avaliarmos e posteriormente agendarmos outra reunião para você fazer as demonstrações/explicações para o time.
+
+
+    
+    
+    
