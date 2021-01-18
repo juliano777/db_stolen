@@ -158,19 +158,24 @@ RETURNS TABLE (
     transfer_value_ numeric(15,2)) AS $xyz$
 BEGIN
     RETURN QUERY
+
     SELECT                                       
         to_char(dt, 'dd/mm/YYYY HH:MM') AS dt,
         destiny_account AS account,
         (transfer_value * -1) AS transfer_value
         FROM tb_transaction
-        WHERE source_account = account_number
-        UNION
-        SELECT
+        WHERE source_account = account_number               
+
+    UNION
+        
+    SELECT
         to_char(dt, 'dd/mm/YYYY HH:MM') AS dt,
         source_account AS account,
         transfer_value
         FROM tb_transaction
-        WHERE destiny_account = account_number;
+        WHERE destiny_account = account_number
+    ORDER BY dt;
+        
 END;
 $xyz$ LANGUAGE PLPGSQL;
 
