@@ -35,7 +35,7 @@ BEGIN
 END; $body$
 LANGUAGE PLPGSQL;
 
--- Function para criar várias partições dada uma faixa de datas
+-- Procedure para criar várias partições dada uma faixa de datas
 CREATE OR REPLACE PROCEDURE sp_create_multiple_partitions (
     table_name text,  -- Tabela particionada
     start_date timestamp without time zone, -- Data de ínício

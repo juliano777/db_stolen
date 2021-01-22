@@ -18,11 +18,12 @@ commit_siblings =
 wal_writer_flush_after = 16MB
 checkpoint_completion_target = < aproximadamente 0.85 >
 checkpoint_flush_after = 256kB
-max_wal_size = 1GB
+checkpoint_timeout
+max_wal_size = 1GB 
 min_wal_size = 80MB
-default_statistics_target = 
-
-
+default_statistics_target = 1000
+commit_delay = 1000
+commit_siblings = 20
 autovacuum_max_workers = 
 
 
