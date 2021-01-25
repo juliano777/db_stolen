@@ -18,7 +18,7 @@ CREATE TABLE tb_account_type (
 CREATE TABLE tb_account (
     id_ int PRIMARY KEY,  -- Identificação da conta (Número da conta)
     type_ int2 REFERENCES tb_account_type (id_) default 1, -- Tipo de conta
-    balance numeric (15, 2),  -- Saldo
+    balance bigint,  -- Saldo
     CONSTRAINT ck_balance_not_neg CHECK (balance >= 0)  -- Restrição CHECK para evitar saldo negativo
     );
 
@@ -27,7 +27,7 @@ CREATE TABLE tb_transaction (
 	source_account int,
 	destiny_account int,
 	dt timestamp with time zone,
-	transfer_value numeric (15, 2),
+	transfer_value bigint,
 	PRIMARY KEY (source_account, destiny_account, dt))
 	PARTITION BY RANGE (dt);
 	

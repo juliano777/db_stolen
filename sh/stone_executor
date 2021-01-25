@@ -76,6 +76,9 @@ SQL="CALL sp_random_transfer(
 		'${START}'::timestamp without time zone,
 		'${END}'::timestamp without time zone));"
 
+
+ CALL sp_random_transfer ('2000-01-01'::timestamp with time zone, now());		
+
 echo ${SQL} > ${SQL_FILE}
 
 PGBENCH_OPTIONS="\

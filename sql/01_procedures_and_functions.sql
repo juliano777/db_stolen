@@ -2,10 +2,13 @@
 Procedures e funções
 */
 
+
+-- PARTICIONAMENTO ===========================================================
+
 -- Procedure para criar uma nova partição
 CREATE OR REPLACE PROCEDURE sp_create_partition(
     table_name text,  -- Tabela particionada
-    ns_partition tex default 'public', -- Schema das partições
+    ns_partition text default 'public', -- Schema das partições
     ns_table text default 'public',  -- Schema da tabela partionada
     base_date timestamp without time zone default now()  -- Data base
     )  
@@ -59,7 +62,10 @@ END;
 $body$ LANGUAGE PLPGSQL;
 
 
--- Função para criar datas aleatórias
+-- FUNÇÕES E PROCEDURES AUXILIARES ===========================================
+
+
+-- Função para criar datas aleatóriass
 CREATE OR REPLACE FUNCTION fc_random_timestamp(
 	start_date timestamp with time zone,
 	end_date timestamp with time zone)
@@ -70,12 +76,14 @@ END;
 $body$
 LANGUAGE PLPGSQL;
 
+-- TRANSFERÊNCIAS ============================================================
+
 -- Criação de procedure para executar transferências
 CREATE OR REPLACE PROCEDURE sp_transfer (
     source_ int,
     destiny_ int,
-    value_ numeric(15, 2),
-	dt timestamp with time zone default now()
+    value_ bigint,
+	dt_ timestamp with time zone default now()
     ) AS $body$
     
     BEGIN
@@ -91,33 +99,30 @@ CREATE OR REPLACE PROCEDURE sp_transfer (
 	-- Registrar transação
 	INSERT INTO tb_transaction
 		(source_account, destiny_account, dt, transfer_value)
-	VALUES (source_, destiny_, dt, value_);
+	VALUES (source_, destiny_, dt_, value_);
+
+    -- Ajustando formato numérico para a mensagem
+    SET lc_numeric = 'pt_BR.UTF-8';
+
+    -- Mensagem informativa
+    RAISE NOTICE 'Transferido de % para %: R$ % em %', 
+        source_,
+        destiny_,
+        trim(to_char((value_ / 100), '999G999G999G999D99')),
+        to_char(dt_, 'dd/mm/YYYY HH:MM');
         
     END;
     $body$ LANGUAGE PLPGSQL;
 
 -- Procedure para realizar transferências aleatórias
-CREATE OR REPLACE PROCEDURE sp_random_transfer () AS $body$
+CREATE OR REPLACE PROCEDURE sp_random_transfer (
+    account_type int default ceil(random() * 2),
+    dt timestamp with time zone default now()
+    ) AS $body$
     DECLARE
             source_ int;
             destiny_ int;
-            value_ numeric(15, 2);        
-    BEGIN
-    	SELECT id_ INTO source_ FROM tb_account ORDER BY random() LIMIT 1;
-    	SELECT id_ INTO destiny_ FROM tb_account WHERE id_ != source_ ORDER BY random() LIMIT 1;
-    	SELECT balance * 0.1 INTO value_ FROM tb_account WHERE id_ = source_;
-    	CALL sp_transfer (source_, destiny_, value_);
-    	RAISE NOTICE 'Transferido de % para %: R$ %', source_, destiny_, value_;
-    END;
-    $body$ LANGUAGE PLPGSQL;
-
-
--- Procedure para realizar transferências aleatórias de um determinado tipo de conta
-CREATE OR REPLACE PROCEDURE sp_random_transfer (account_type int, dt timestamp with time zone) AS $body$
-    DECLARE
-            source_ int;
-            destiny_ int;
-            value_ numeric(15, 2);        
+            value_ bigint;        
     BEGIN
     	SELECT
         	id_ INTO source_
@@ -128,7 +133,6 @@ CREATE OR REPLACE PROCEDURE sp_random_transfer (account_type int, dt timestamp w
     	SELECT id_ INTO destiny_ FROM tb_account WHERE id_ != source_ ORDER BY random() LIMIT 1;
     	SELECT balance * 0.1 INTO value_ FROM tb_account WHERE id_ = source_;
     	CALL sp_transfer (source_, destiny_, value_, dt);
-    	RAISE NOTICE 'Transferido de % para %: R$ %', source_, destiny_, value_;
     END;
     $body$ LANGUAGE PLPGSQL;
 
@@ -144,7 +148,7 @@ BEGIN
 				WHERE schemaname != 'sc_partitions'
 					AND relname != 'tb_account_type'
 	LOOP
-		'TRUNCATE '||r.i||' RESTART IDENTITY CASCADE';
+		EXECUTE 'TRUNCATE '||r.i||' RESTART IDENTITY CASCADE';
 	END LOOP;
 END;
 $body$ LANGUAGE PLPGSQL;
@@ -155,7 +159,7 @@ CREATE OR REPLACE FUNCTION fc_bank_statement (account_number int)
 RETURNS TABLE (
     dt_ text, 
     account_ int,
-    transfer_value_ numeric(15,2)) AS $xyz$
+    transfer_value_ bigint) AS $xyz$
 BEGIN
     RETURN QUERY
 

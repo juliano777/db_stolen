@@ -15,3 +15,12 @@ INSERT INTO tb_account (id_, type_, balance)
         generate_series(70001, 100000),  -- 30000 contas criadas (30% tipo 2)
         2,  -- Conta tipo 2
         (random() * 100000000)::numeric(15, 2);  -- Valores aleatórios para saldo
+
+
+table_name text,
+start_date timestamp without time zone,
+end_date timestamp without time zone DEFAULT now(),
+ns_partition text DEFAULT 'public'::text,
+ns_table text DEFAULT 'public'::text
+
+
