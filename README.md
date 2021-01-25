@@ -1,9 +1,32 @@
 # Ambiente de transações bancárias
 
-VM VirtualBox  
-SO Debian 10  
-Núcleos de CPU 6  
-Memória 16G  
+## Laboratório
+
+**Máquina dos testes**
+
+| **Tipo de virtualização** | Virtualização Total |
+|---------------------------|---------------------|
+| **Virtualizador**         | VirtualBox          |
+| **Sistema operacional**   | Debian 10           |
+| **Núcleos de CPU**        | 6                   |
+| **Memória RAM**           | 16GB                |
+
+### Preparação 
+
+#### Instalação do PostgreSQL
+
+#### Ajustes no sistema operacional
+
+## Procedimentos de ...
+
+## Procedimentos de ...
+
+## Procedimentos de ...
+
+---
+
+
+ 
 
 
 
