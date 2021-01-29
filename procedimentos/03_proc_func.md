@@ -1,11 +1,9 @@
-/*
-Procedures e funções
-*/
+# Criação de procedures e funções
 
+## Particionamento
 
--- PARTICIONAMENTO ===========================================================
-
--- Procedure para criar uma nova partição
+**[>]** Procedure para criar uma nova partição:
+```sql
 CREATE OR REPLACE PROCEDURE sp_create_partition(
     table_name text,  -- Tabela particionada
     ns_partition text default 'public', -- Schema das partições
@@ -37,8 +35,10 @@ BEGIN
 
 END; $body$
 LANGUAGE PLPGSQL;
+``` 
 
--- Procedure para criar várias partições dada uma faixa de datas
+**[>]** Procedure para criar várias partições dada uma faixa de datas:
+```sql
 CREATE OR REPLACE PROCEDURE sp_create_multiple_partitions (
     table_name text,  -- Tabela particionada
     start_date timestamp without time zone, -- Data de ínício
@@ -60,12 +60,12 @@ BEGIN
 	END LOOP;
 END;
 $body$ LANGUAGE PLPGSQL;
+``` 
 
+## Funções e procedures auxiliares
 
--- FUNÇÕES E PROCEDURES AUXILIARES ===========================================
-
-
--- Função para criar datas aleatórias
+**[>]** Função para criar datas aleatórias:
+```sql
 CREATE OR REPLACE FUNCTION fc_random_timestamp(
 	start_date timestamp with time zone,
 	end_date timestamp with time zone)
@@ -75,10 +75,31 @@ BEGIN
 END;
 $body$
 LANGUAGE PLPGSQL;
+``` 
 
--- TRANSFERÊNCIAS ============================================================
+**[>]** Procedure para "zerar" todas as tabelas:
+```sql
+CREATE OR REPLACE PROCEDURE sp_zero()
+ AS $body$
+DECLARE
+	r record;
+BEGIN
+	FOR r IN
+		SELECT schemaname||'.'||relname AS i
+			FROM pg_stat_user_tables
+				WHERE schemaname != 'sc_partitions'
+					AND relname != 'tb_account_type'
+	LOOP
+		EXECUTE 'TRUNCATE '||r.i||' RESTART IDENTITY CASCADE';
+	END LOOP;
+END;
+$body$ LANGUAGE PLPGSQL;
+``` 
 
--- Criação de procedure para executar transferências
+## Transferências
+
+**[>]** Procedure para executar transferências:
+```sql
 CREATE OR REPLACE PROCEDURE sp_transfer (
     source_ int,
     destiny_ int,
@@ -113,8 +134,10 @@ CREATE OR REPLACE PROCEDURE sp_transfer (
         
     END;
     $body$ LANGUAGE PLPGSQL;
+``` 
 
--- Procedure para realizar transferências aleatórias
+**[>]** Procedure para realizar transferências aleatórias:
+```sql
 CREATE OR REPLACE PROCEDURE sp_random_transfer (
     account_type int default ceil(random() * 2),
     dt timestamp with time zone default now()
@@ -135,26 +158,12 @@ CREATE OR REPLACE PROCEDURE sp_random_transfer (
     	CALL sp_transfer (source_, destiny_, value_, dt);
     END;
     $body$ LANGUAGE PLPGSQL;
+``` 
 
--- Procedure para "zerar" todas as tabelas
-CREATE OR REPLACE PROCEDURE sp_zero()
- AS $body$
-DECLARE
-	r record;
-BEGIN
-	FOR r IN
-		SELECT schemaname||'.'||relname AS i
-			FROM pg_stat_user_tables
-				WHERE schemaname != 'sc_partitions'
-					AND relname != 'tb_account_type'
-	LOOP
-		EXECUTE 'TRUNCATE '||r.i||' RESTART IDENTITY CASCADE';
-	END LOOP;
-END;
-$body$ LANGUAGE PLPGSQL;
+## Extrato bancário
 
-
--- Função para gerar extrato
+**[>]** Função para gerar extrato:
+```sql
 CREATE OR REPLACE FUNCTION fc_bank_statement (account_number int)
 RETURNS TABLE (
     dt_ text, 
@@ -182,4 +191,4 @@ BEGIN
         
 END;
 $xyz$ LANGUAGE PLPGSQL;
-
+``` 

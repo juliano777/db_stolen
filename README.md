@@ -11,23 +11,17 @@
 | **Núcleos de CPU**        | 6                   |
 | **Memória RAM**           | 16GB                |
 
-### Preparação 
-
-#### Instalação do PostgreSQL
-
-#### Ajustes no sistema operacional
-
-## Procedimentos de ...
-
-## Procedimentos de ...
-
-## Procedimentos de ...
-
 ---
 
+### Preparação 
 
- 
+- [**Instalação do PostgreSQL**](procedimentos/00_install_postgres.md)
+- [**Instalação do PgBouncer**](procedimentos/01_install_pgbouncer.md)
+- [**Criação da estrutura do banco de dados**](procedimentos/02_db.md)
+- [**Criação de procedures e funções**](procedimentos/03_proc_func.md)
+- [**Dados iniciais**](procedimentos/04_initial_data.md)
 
+---
 
 
 
