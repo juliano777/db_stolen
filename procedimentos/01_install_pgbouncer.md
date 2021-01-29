@@ -1,3 +1,5 @@
+[<- Voltar](../README.md)
+
 # Instalação do PgBouncer via código-fonte
 
 O PgBouncer é um excelente *connection pooler*.  
@@ -163,3 +165,5 @@ systemctl enable --now pgbouncer.service
 ```bash
 apt purge -y ${PKG} ${PKG_DEB}
 ```
+
+[<- Voltar](../README.md)

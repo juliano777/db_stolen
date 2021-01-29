@@ -1,3 +1,5 @@
+[<- Voltar](../README.md)
+
 # Dados iniciais
 
 **[>]** Populando a tabela tb_account_type:
@@ -16,3 +18,5 @@ CALL sp_create_multiple_partitions(
     'sc_partitions'::text,
     'public'::text);
 ``` 
+
+[<- Voltar](../README.md)
