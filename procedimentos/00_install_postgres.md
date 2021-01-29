@@ -258,3 +258,54 @@ Terminada a instalação, por questões de boas práticas de segurança devemos 
 ```bash
 apt purge -y ${PKG} ${PKG_DEB}
 ```
+
+
+## SSH sem senha
+
+Após instalar um servidor PostgreSQL é interessante que sua admnistração seja feita somente pelo usuário `postgres`.  
+Evitar o usuário `root` e fazer com que o DBA se conecte ao servidor através de uma chave pública autorizada.  
+&nbsp;  
+  
+
+**[$]** Armazenar o endereço na variável de ambiente:
+```bash
+read -p 'Digite o endereço do Servidor PostgreSQL: ' PGSERVER
+```
+
+```
+Digite o endereço do Servidor PostgreSQL:
+```  
+  
+**[$]** Caso não exista a chave na máquina local, a mesma será criada:
+```bash
+if [ ! -e ~/.ssh/id_rsa ]; then
+    ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa;
+fi
+```  
+  
+**[$]** Adicionando a chave pública do usuário e máquina local para o usuário root do servidor:
+```bash
+ssh-copy-id root@${PGSERVER}
+```  
+  
+**[$]** Adicionando a chave pública do usuário e máquina local para o usuário root do servidor:
+```bash
+ssh-copy-id root@${PGSERVER}
+```  
+
+**[$]** Criando chaves para o usuário postgres:
+```bash
+ssh root@${PGSERVER} \
+"su - postgres -c \"ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa\""
+```  
+  
+**[$]** Adicionando a chave pública para o usuário postgres do servidor:
+```bash
+cat ~/.ssh/id_rsa.pub | \
+ssh root@${PGSERVER} "cat - >> ~postgres/.ssh/authorized_keys"
+```  
+  
+**[$]** Teste de acesso como usuário postgres:
+```bash
+ssh postgres@${PGSERVER}
+```
