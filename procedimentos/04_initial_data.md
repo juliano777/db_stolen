@@ -69,6 +69,7 @@ FOR i in 1 .. 2000000 LOOP
 	fc_random_timestamp(
 		'2020-01-01'::timestamp without time zone,
 		now()::timestamp without time zone));
+    RAISE NOTICE '%', i;
 END LOOP;
 END;
 $$ LANGUAGE PLPGSQL;

@@ -128,16 +128,6 @@ CREATE OR REPLACE PROCEDURE sp_transfer (
 		(source_account, destiny_account, dt, transfer_value)
 	VALUES (source_, destiny_, dt_, value_);
 
-    -- Ajustando formato numérico para a mensagem
-    SET lc_numeric = 'pt_BR.UTF-8';
-
-    -- Mensagem informativa
-    RAISE NOTICE 'Transferido de % para %: R$ % em %', 
-        source_,
-        destiny_,
-        trim(to_char((value_ / 100), '999G999G999G999D99')),
-        to_char(dt_, 'dd/mm/YYYY HH:MM');
-        
     END;
     $body$ LANGUAGE PLPGSQL;
 ``` 
