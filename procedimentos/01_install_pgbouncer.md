@@ -67,12 +67,6 @@ URL="http://www.pgbouncer.org/downloads/files/\
 ${VERSION}/pgbouncer-${VERSION}.tar.gz"
 ```
 
-**[#]** URL para baixar o PgBouncer:
-```bash
-URL="http://www.pgbouncer.org/downloads/files/\
-${VERSION}/pgbouncer-${VERSION}.tar.gz"
-```
-
 **[#]** Baixar o PgBouncer para o diretório /tmp:
 ```bash
 wget ${URL} -P /tmp/
