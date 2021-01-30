@@ -1,4 +1,8 @@
-[<- Voltar](../README.md)
+[**[Home]**](../README.md "Página inicial") - 
+[**<**](00_install_postgres.md "Instalação do PostgreSQL via código-fonte") - 
+[**>**](02_db.md "Criação da estrutura do banco de dados")
+
+---
 
 # Instalação do PgBouncer via código-fonte
 
@@ -166,4 +170,8 @@ systemctl enable --now pgbouncer.service
 apt purge -y ${PKG} ${PKG_DEB}
 ```
 
-[<- Voltar](../README.md)
+--- 
+
+[**[Home]**](../README.md "Página inicial") - 
+[**<**](00_install_postgres.md "Instalação do PostgreSQL via código-fonte") - 
+[**>**](02_db.md "Criação da estrutura do banco de dados")

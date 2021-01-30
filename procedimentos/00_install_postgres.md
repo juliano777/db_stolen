@@ -1,4 +1,8 @@
-[<- Voltar](../README.md)
+[**[Home]**](../README.md "Página inicial") - 
+[**<**](../README.md "Página inicial") - 
+[**>**](01_install_pgbouncer.md "Instalação do PgBouncer via código-fonte")
+
+---
 
 # Instalação do PostgreSQL via código-fonte
 
@@ -251,7 +255,10 @@ mount -a
 ```bash
 systemctl enable --now postgresql
 ```
-[<- Voltar](../README.md)
+[**[Home]**](../README.md "Página inicial") - 
+[**<**](../README.md "Página inicial") - 
+[**>**](01_install_pgbouncer.md "Instalação do PgBouncer via código-fonte")
+
 ## Limpeza de pacote desnecessários
 
 Terminada a instalação, por questões de boas práticas de segurança devemos remover os pacotes utilizados conforme o tipo de distribuição Linux.
@@ -261,7 +268,10 @@ Terminada a instalação, por questões de boas práticas de segurança devemos 
 apt purge -y ${PKG} ${PKG_DEB}
 ```
 
-[<- Voltar](../README.md)
+[**[Home]**](../README.md "Página inicial") - 
+[**<**](../README.md "Página inicial") - 
+[**>**](01_install_pgbouncer.md "Instalação do PgBouncer via código-fonte")
+
 ## SSH sem senha
 
 Após instalar um servidor PostgreSQL é interessante que sua admnistração seja feita somente pelo usuário `postgres`.  
@@ -311,4 +321,9 @@ ssh root@${PGSERVER} "cat - >> ~postgres/.ssh/authorized_keys"
 ```bash
 ssh postgres@${PGSERVER}
 ```
-[<- Voltar](../README.md)
+
+---
+
+[**[Home]**](../README.md "Página inicial") - 
+[**<**](../README.md "Página inicial") - 
+[**>**](01_install_pgbouncer.md "Instalação do PgBouncer via código-fonte")
