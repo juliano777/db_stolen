@@ -142,16 +142,16 @@ CREATE OR REPLACE PROCEDURE sp_transfer (
     $body$ LANGUAGE PLPGSQL;
 ``` 
 
-**[>]** Procedure para realizar transferências aleatórias:
+**[>]** Procedure para realizar transferências aleatórias com dois parâmetros:
 ```sql
 CREATE OR REPLACE PROCEDURE sp_random_transfer (
     account_type int default ceil(random() * 2),
     dt timestamp with time zone default now()
     ) AS $body$
     DECLARE
-            source_ int;
-            destiny_ int;
-            value_ bigint;        
+        source_ int;
+        destiny_ int;
+        value_ bigint;        
     BEGIN
 
         -- source_ = conta de origem
@@ -173,13 +173,29 @@ CREATE OR REPLACE PROCEDURE sp_random_transfer (
         -- value_ = valor de transferência
         SELECT balance * 0.1 INTO value_ FROM tb_account WHERE id_ = source_;
 
-        RAISE NOTICE 'source_ %', source_;
-        RAISE NOTICE 'destiny_ %', destiny_;
-        RAISE NOTICE 'value_ %', value_;
-        RAISE NOTICE 'dt %', dt;
+        -- Efetua a transferências com as variáveis coletadas
+    	CALL sp_transfer (source_, destiny_, value_, dt);
+    END;
+    $body$ LANGUAGE PLPGSQL;
+``` 
+
+**[>]** Procedure para realizar transferências aleatórias com um parâmetro:
+```sql
+CREATE OR REPLACE PROCEDURE sp_random_transfer (
+    dt timestamp with time zone default now()
+    ) AS $body$
+    DECLARE
+        account_type_ int;
+    BEGIN
+        -- source_ = conta de origem
+    	SELECT
+        	id_ INTO account_type_
+			FROM tb_account_type
+			ORDER BY random()
+			LIMIT 1;
 
         -- Efetua a transferências com as variáveis coletadas
-    	-- CALL sp_transfer (source_, destiny_, value_, dt);
+        CALL sp_random_transfer (account_type_, dt);
     END;
     $body$ LANGUAGE PLPGSQL;
 ``` 
