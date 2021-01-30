@@ -153,15 +153,33 @@ CREATE OR REPLACE PROCEDURE sp_random_transfer (
             destiny_ int;
             value_ bigint;        
     BEGIN
+
+        -- source_ = conta de origem
     	SELECT
         	id_ INTO source_
 			FROM tb_account
 			WHERE type_ = account_type
 			ORDER BY random()
 			LIMIT 1;
-    	SELECT id_ INTO destiny_ FROM tb_account WHERE id_ != source_ ORDER BY random() LIMIT 1;
-    	SELECT balance * 0.1 INTO value_ FROM tb_account WHERE id_ = source_;
-    	CALL sp_transfer (source_, destiny_, value_, dt);
+
+        -- destiny = conta de destino
+        SELECT
+            id_ INTO destiny_
+            FROM tb_account
+            WHERE id_ != source_
+            ORDER BY random()
+            LIMIT 1;
+        
+        -- value_ = valor de transferência
+        SELECT balance * 0.1 INTO value_ FROM tb_account WHERE id_ = source_;
+
+        RAISE NOTICE 'source_ %', source_;
+        RAISE NOTICE 'destiny_ %', destiny_;
+        RAISE NOTICE 'value_ %', value_;
+        RAISE NOTICE 'dt %', dt;
+
+        -- Efetua a transferências com as variáveis coletadas
+    	-- CALL sp_transfer (source_, destiny_, value_, dt);
     END;
     $body$ LANGUAGE PLPGSQL;
 ``` 

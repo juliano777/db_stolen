@@ -1,5 +1,5 @@
 [**[Home]**](../README.md "Página inicial") - 
-[**<**](06_second_scenario.md "Segundo cenário - 1000 contas")
+[**<**](04_initial_data.md "Segundo cenário - 1000 contas")
 [**>**]()
 
 ---
@@ -117,5 +117,5 @@ SELECT * FROM tb_account WHERE id_ IN (1, 2);
 ---
 
 [**[Home]**](../README.md "Página inicial") - 
-[**<**](06_second_scenario.md "Segundo cenário - 1000 contas")
+[**<**](04_initial_data.md "Segundo cenário - 1000 contas")
 [**>**]()
