@@ -89,13 +89,19 @@ CREATE OR REPLACE PROCEDURE sp_zero()
  AS $body$
 DECLARE
 	r record;
+    sql text;
 BEGIN
 	FOR r IN
-		SELECT schemaname||'.'||relname AS i
-			FROM pg_stat_user_tables
-				WHERE schemaname != 'sc_partitions'
-					AND relname != 'tb_account_type'
+		SELECT
+            n.nspname||'.'||c.relname AS i
+            FROM pg_catalog.pg_class AS c
+            INNER JOIN pg_catalog.pg_namespace AS n
+                ON (c.relnamespace = n.oid)
+            WHERE c.relkind IN ('r', 'p')
+                AND n.nspname !~ 'sc_partitions|information_schema|^pg_'
+                AND c.relname != 'tb_account_type'
 	LOOP
+        sql = 'TRUNCATE '||r.i||' RESTART IDENTITY CASCADE';
 		EXECUTE 'TRUNCATE '||r.i||' RESTART IDENTITY CASCADE';
 	END LOOP;
 END;

@@ -53,7 +53,54 @@ INSERT INTO tb_account (id_, type_, balance)
         generate_series(70001, 100000),  -- 30000 contas criadas (30% tipo 2)
         2,  -- Conta tipo 2
         (random() * 100000000)::numeric(15, 2);  -- Valores aleatórios para saldo
+```  
+
+**[$]** ---:
+```bash
+cat << EOF > /tmp/2M.sql
+CALL sp_random_transfer(
+	fc_random_timestamp(
+		'2020-01-01'::timestamp without time zone,
+		now()::timestamp without time zone));
+EOF
 ``` 
+
+**[$]** ---:
+```bash
+cat << EOF > /tmp/2M.sql
+CALL sp_random_transfer(
+	fc_random_timestamp(
+		'2020-01-01'::timestamp without time zone,
+		now()::timestamp without time zone));
+EOF
+``` 
+
+
+pgbench -i db_stone
+
+stone_executor -a 1 -c 200 -t 10000 -d db_stone -p 6432 -f /tmp/2M.sql
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 **[>]** Loop para criar 2 milhões de transações:
 ```sql
