@@ -30,13 +30,13 @@ CALL sp_create_multiple_partitions(
 INSERT INTO tb_account (id_, balance) 
     SELECT 
         generate_series(1, 70000),  -- 70000 contas criadas (70% tipo 1)
-        (random() * 100000000)::numeric(15, 2);  -- Valores aleatórios para saldo
+        (random() * 10000000000);  -- Valores aleatórios para saldo
         
 INSERT INTO tb_account (id_, type_, balance) 
     SELECT 
         generate_series(70001, 100000),  -- 30000 contas criadas (30% tipo 2)
         2,  -- Conta tipo 2
-        (random() * 100000000)::numeric(15, 2);  -- Valores aleatórios para saldo
+        (random() * 10000000000);  -- Valores aleatórios para saldo
 ``` 
 
 ## Segundo cenário - 1000 contas
@@ -45,14 +45,14 @@ INSERT INTO tb_account (id_, type_, balance)
 ```sql
 INSERT INTO tb_account (id_, balance) 
     SELECT 
-        generate_series(1, 70000),  -- 70000 contas criadas (70% tipo 1)
-        (random() * 100000000)::numeric(15, 2);  -- Valores aleatórios para saldo
+        generate_series(1, 700),  -- 700 contas criadas (70% tipo 1)
+        (random() * 10000000000);  -- Valores aleatórios para saldo
         
 INSERT INTO tb_account (id_, type_, balance) 
     SELECT 
-        generate_series(70001, 100000),  -- 30000 contas criadas (30% tipo 2)
+        generate_series(701, 1000),  -- 300 contas criadas (30% tipo 2)
         2,  -- Conta tipo 2
-        (random() * 100000000)::numeric(15, 2);  -- Valores aleatórios para saldo
+        (random() * 10000000000);  -- Valores aleatórios para saldo
 ```  
 
 **[$]** ---:
