@@ -1,6 +1,6 @@
 [**[Home]**](../README.md "Página inicial") - 
-[**<**](02_db.md "Criação da estrutura do banco de dados")
-[**>**](04_initial_data.md "Dados iniciais")
+[**<**](04_initial_data.md "Dados iniciais")
+[**>**](06_tests.md "Testes")
 
 ---
 
@@ -232,5 +232,5 @@ $xyz$ LANGUAGE PLPGSQL;
 ---
 
 [**[Home]**](../README.md "Página inicial") - 
-[**<**](02_db.md "Criação da estrutura do banco de dados")
-[**>**](04_initial_data.md "Dados iniciais")
+[**<**](04_initial_data.md "Dados iniciais")
+[**>**](06_tests.md "Testes")

@@ -1,6 +1,6 @@
 [**[Home]**](../README.md "Página inicial") - 
 [**<**](00_install_postgres.md "Instalação do PostgreSQL via código-fonte") - 
-[**>**](02_db.md "Criação da estrutura do banco de dados")
+[**>**](02_server_tuning.md "Criação da estrutura do banco de dados")
 
 ---
 
@@ -168,4 +168,4 @@ apt purge -y ${PKG} ${PKG_DEB}
 
 [**[Home]**](../README.md "Página inicial") - 
 [**<**](00_install_postgres.md "Instalação do PostgreSQL via código-fonte") - 
-[**>**](02_db.md "Criação da estrutura do banco de dados")
+[**>**](02_server_tuning.md "Criação da estrutura do banco de dados")

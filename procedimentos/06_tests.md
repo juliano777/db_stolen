@@ -1,5 +1,5 @@
 [**[Home]**](../README.md "Página inicial") - 
-[**<**](04_initial_data.md "Segundo cenário - 1000 contas")
+[**<**](05_proc_func.md "Criação de procedures e funções")
 [**>**]()
 
 ---
@@ -114,8 +114,14 @@ SELECT * FROM tb_account WHERE id_ IN (1, 2);
 
 
 
+
+pgbench -i db_stone
+
+stone_executor -a 1 -c 200 -t 10000 -d db_stone -p 6432 -f /tmp/2M.sql
+
+
 ---
 
 [**[Home]**](../README.md "Página inicial") - 
-[**<**](04_initial_data.md "Segundo cenário - 1000 contas")
+[**<**](05_proc_func.md "Criação de procedures e funções")
 [**>**]()

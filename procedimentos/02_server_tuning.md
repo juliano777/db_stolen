@@ -1,10 +1,12 @@
 [**[Home]**](../README.md "Página inicial") - 
 [**<**](01_install_pgbouncer.md "Instalação do PgBouncer via código-fonte") - 
-[**>**](03_proc_func.md "Criação de procedures e funções")
+[**>**](03_db.md "Criação da estrutura do banco de dados")
 
 ---
 
 # Tuning do servidor de banco de dados
+
+## Parâmetros do PostgreSQL que requerem mudanças no sistema operacional  
 
 **[>]** Verificando parâmetros:
 ```sql
@@ -47,13 +49,16 @@ sed 's:^\(#huge_pages.*\):\1\nhuge_pages = on:g' \
     -i ${PGDATA}/postgresql.conf
 ```
 
-
+**[#]** Editar o arquivo de serviço do PostgreSQL no SystemD:
+```bash
 systemctl edit --full postgresql.service
-
-
+```
+```
 [Service]
 . . .
 LimitSTACK=20971520
+```
+Foi ajustado em bytes o valor para a pilha, o equivalente a 20MB.
 
 **[>]** Verificando parâmetros:
 ```sql
@@ -100,22 +105,30 @@ pg_ctl restart
 . . . request size (currently 13210722304 bytes) . . .
 ```
 Foi requerida memória, como *huge pages* 12901096 kb.  
-O ajuste será feito para 15481315 (20% a mais).
+O ajuste será feito para 15481315 (20% a mais).  
 
-
+**[#]** Instalação do utilitário bc:
+```bash
 apt install -y bc && apt clean
+```
 
-
-
+**[#]** Variáveis de ambiente para configuração de huge pages:
+```bash
+# Tamanho de uma huge page
 export HUGEPAGESIZE=`cat /proc/meminfo | fgrep Hugepagesize | awk '{print $2}'`
+# Total de huge pages em kb
 export HUGE_PAGES_TOTAL_KB=15481315
+# Quantidade de huge pages
 export NR_HUGEPAGES=`echo "${HUGE_PAGES_TOTAL_KB} / ${HUGEPAGESIZE}" | bc`
+```
 
-
+**[#]** :
+```bash
 cat << EOF > /etc/sysctl.d/postgres.conf
 vm.nr_hugepages = ${NR_HUGEPAGES}
 vm.hugetlb_shm_group = `id -g postgres`
 EOF
+```
 
 sysctl -p
 
@@ -124,7 +137,11 @@ postgres  hard  memlock  ${HUGE_PAGES_TOTAL_KB}
 postgres  soft  memlock  ${HUGE_PAGES_TOTAL_KB}
 EOF
 
+## Tuning de sistema operacional  
 
 
+---
 
-
+[**[Home]**](../README.md "Página inicial") - 
+[**<**](01_install_pgbouncer.md "Instalação do PgBouncer via código-fonte") - 
+[**>**](03_db.md "Criação da estrutura do banco de dados")

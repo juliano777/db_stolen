@@ -1,6 +1,6 @@
 [**[Home]**](../README.md "Página inicial") - 
-[**<**](03_proc_func.md "Criação de procedures e funções") - 
-[**>**]()
+[**<**](03_db.md "Criação da estrutura do banco de dados") - 
+[**>**](05_proc_func.md "Criação de procedures e funções")
 
 ---
 
@@ -75,33 +75,6 @@ CALL sp_random_transfer(
 EOF
 ``` 
 
-
-pgbench -i db_stone
-
-stone_executor -a 1 -c 200 -t 10000 -d db_stone -p 6432 -f /tmp/2M.sql
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 **[>]** Loop para criar 2 milhões de transações:
 ```sql
 -- Mudar o parâmetro para ocultar mensagens na tela
@@ -125,5 +98,5 @@ $$ LANGUAGE PLPGSQL;
 ---
 
 [**[Home]**](../README.md "Página inicial") - 
-[**<**](03_proc_func.md "Criação de procedures e funções") - 
-[**>**]()
+[**<**](03_db.md "Criação da estrutura do banco de dados") - 
+[**>**](05_proc_func.md "Criação de procedures e funções")
