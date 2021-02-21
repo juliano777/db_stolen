@@ -122,7 +122,7 @@ export HUGE_PAGES_TOTAL_KB=15481315
 export NR_HUGEPAGES=`echo "${HUGE_PAGES_TOTAL_KB} / ${HUGEPAGESIZE}" | bc`
 ```
 
-**[#]** :
+**[#]** Criação de um arquivo de configuração sysctl para parâmetros do kernel:
 ```bash
 cat << EOF > /etc/sysctl.d/postgres.conf
 vm.nr_hugepages = ${NR_HUGEPAGES}
@@ -130,15 +130,57 @@ vm.hugetlb_shm_group = `id -g postgres`
 EOF
 ```
 
+**[#]** Aplicar as configurações:
+```bash
 sysctl -p
+```
 
+**[#]** Adicionar linhas no arquivo de configuração de limites de segurança:
+```bash
 cat << EOF >> /etc/security/limits.d/postgres.conf
 postgres  hard  memlock  ${HUGE_PAGES_TOTAL_KB}
 postgres  soft  memlock  ${HUGE_PAGES_TOTAL_KB}
 EOF
+```
 
 ## Tuning de sistema operacional  
 
+**[#]** Criação do /etc/rc.local e permissão de execução:
+```bash
+cat << EOF > /etc/rc.local && chmod +x /etc/rc.local
+#!/bin/bash
+
+blockdev --setra 8192 /dev/sda
+blockdev --setra 8192 /dev/sdb
+blockdev --setra 8192 /dev/sdc
+EOF
+```
+Configurando readahed de cada disco para 4MB.
+
+**[#]** Criação do unit file do SystemD para o rc.local:
+```bash
+cat << EOF > /etc/systemd/system/rc-local.service
+[Unit]
+Description='/etc/rc.local Compatibility'
+ConditionPathExists=/etc/rc.local
+
+[Service]
+Type=forking
+ExecStart=/etc/rc.local start
+TimeoutSec=0
+StandardOutput=tty
+RemainAfterExit=yes
+SysVStartPriority=99
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+**[#]** Habilitação do serviço e start imediato:
+```bash
+systemctl enable --now rc-local
+```
 
 ---
 

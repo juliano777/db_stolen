@@ -17,9 +17,11 @@
 
 - [**Instalação do PostgreSQL**](procedimentos/00_install_postgres.md)
 - [**Instalação do PgBouncer**](procedimentos/01_install_pgbouncer.md)
-- [**Criação da estrutura do banco de dados**](procedimentos/02_db.md)
-- [**Criação de procedures e funções**](procedimentos/03_proc_func.md)
+- [**Tuning do servidor de banco de dados**](procedimentos/02_server_tuning.md)
+- [**Criação da estrutura do banco de dados**](procedimentos/03_db.md)
 - [**Dados iniciais**](procedimentos/04_initial_data.md)
+- [**Criação de procedures e funções**](procedimentos/05_proc_func.md)
+- [**Testes**](procedimentos/06_tests.md)
 
 ---
 

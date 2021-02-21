@@ -55,46 +55,6 @@ INSERT INTO tb_account (id_, type_, balance)
         (random() * 10000000000);  -- Valores aleatórios para saldo
 ```  
 
-**[$]** ---:
-```bash
-cat << EOF > /tmp/2M.sql
-CALL sp_random_transfer(
-	fc_random_timestamp(
-		'2020-01-01'::timestamp without time zone,
-		now()::timestamp without time zone));
-EOF
-``` 
-
-**[$]** ---:
-```bash
-cat << EOF > /tmp/2M.sql
-CALL sp_random_transfer(
-	fc_random_timestamp(
-		'2020-01-01'::timestamp without time zone,
-		now()::timestamp without time zone));
-EOF
-``` 
-
-**[>]** Loop para criar 2 milhões de transações:
-```sql
--- Mudar o parâmetro para ocultar mensagens na tela
-SET client_min_messages TO error;
-
--- Loop para efetuar 2 milhões de transações
-DO $$
-BEGIN
-FOR i in 1 .. 2000000 LOOP
-    -- Faz uma transferência aletória
-    CALL sp_random_transfer(
-	fc_random_timestamp(
-		'2020-01-01'::timestamp without time zone,
-		now()::timestamp without time zone));
-    RAISE NOTICE '%', i;
-END LOOP;
-END;
-$$ LANGUAGE PLPGSQL;
-``` 
-
 ---
 
 [**[Home]**](../README.md "Página inicial") - 
