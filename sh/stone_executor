@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts "a:h:p:d:U:f:c:t:s:e:" opt; do
+while getopts "a:h:p:d:U:f:c:t:s:e:T:" opt; do
 case ${opt} in
 	
 	'a' | '--account_type')
@@ -42,6 +42,10 @@ case ${opt} in
 	'e' | '--end')
 		END=${OPTARG}
 		;;
+
+	'T' | '--time')
+		TIME=${OPTARG}
+		;;		
 
 
 	\? )
@@ -90,9 +94,15 @@ PGBENCH_OPTIONS="\
 -U ${DBUSER} \
 -f ${SQL_FILE} \
 -c ${CLIENTS} \
--t ${TRANSACTIONS} \
 ${DBNAME}"
 
+if [ ! -z "${TIME}" ]; then
+	PGBENCH_OPTIONS_EXTRA="-T ${TIME}"
+else
+	PGBENCH_OPTIONS_EXTRA="-t ${TRANSACTIONS}"
+fi
+
+PGBENCH_OPTIONS="${PGBENCH_OPTIONS} ${PGBENCH_OPTIONS_EXTRA}"
 
 echo "pgbench ${PGBENCH_OPTIONS}"
 

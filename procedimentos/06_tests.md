@@ -167,7 +167,7 @@ chmod +x /usr/local/bin/stone_executor
 
 **[$]** Apaga e recria a base de dados:
 ```bash
-dropdb db_stone && createdb db_stone
+dropdb --if-exists db_stone && createdb db_stone
 ```
 
 <hr />  
