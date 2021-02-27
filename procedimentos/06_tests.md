@@ -1,6 +1,6 @@
 [**[Home]**](../README.md "Página inicial") - 
 [**<**](05_proc_func.md "Criação de procedures e funções")
-[**>**]()
+[**>**](07_results.md "Resultados")
 
 ---
 
@@ -213,4 +213,4 @@ stone_executor -a 1 -c 2000 -t 10 -d db_stone -p 6432 -f /tmp/test.sql
 
 [**[Home]**](../README.md "Página inicial") - 
 [**<**](05_proc_func.md "Criação de procedures e funções")
-[**>**]()
+[**>**](07_results.md "Resultados")
