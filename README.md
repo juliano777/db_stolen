@@ -13,7 +13,7 @@
 
 ---
 
-### Preparação 
+### Preparação / Procedimentos
 
 - [**Instalação do PostgreSQL**](procedimentos/00_install_postgres.md)
 - [**Instalação do PgBouncer**](procedimentos/01_install_pgbouncer.md)
