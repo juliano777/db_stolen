@@ -32,6 +32,8 @@
 
 ![Gráfico dos resultados](img/grafico.png)
 
+## Considerações finais e insights
+
 
 
 

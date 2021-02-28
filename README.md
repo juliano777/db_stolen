@@ -22,18 +22,13 @@
 - [**Dados iniciais**](procedimentos/04_initial_data.md)
 - [**Criação de procedures e funções**](procedimentos/05_proc_func.md)
 - [**Testes**](procedimentos/06_tests.md)
+- [**Resultados**](procedimentos/07_results.md)
+- [**Conclusão**](procedimentos/08_conclusion.md)
 
 ---
 
 
-
-stone_executor -a 1 -c 1200 -t 10 -d db_stone -p 6432
-
-stone_executor -a 1 -c 300 -t 10 -d db_stone -p 6432
-
-
-
-Mudança de parâmetros:
+## Tuning de parâmetros:
 
 | **Parâmetro** | **Valor padrão** | **Novo valor** |
 |---------------|------------------|----------------|
