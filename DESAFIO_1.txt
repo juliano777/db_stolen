@@ -1,6 +1,12 @@
 1. Parametrização do PostgreSQL
 
-O PostgreSQL vem por padrão configurado com parâmetros de performance básicos, que permitem que o SGBD execute em praticamente qualquer configuração de hardware e S.O. Tendo em vista as necessidades de negócio e performance impostas pelo desafio e considerando-se que este será um ambiente produtivo, indicar qual a configuração de parâmetros ideal a fim de proporcionar tanto performance quanto segurança dos dados através de Point In Time Recovery.
+O PostgreSQL vem por padrão configurado com parâmetros de performance
+básicos, que permitem que o SGBD execute em praticamente qualquer configuração
+de hardware e S.O.
+Tendo em vista as necessidades de negócio e performance
+impostas pelo desafio e considerando-se que este será um ambiente produtivo,
+indicar qual a configuração de parâmetros ideal a fim de proporcionar tanto
+performance quanto segurança dos dados através de Point In Time Recovery.
 
 Você pode escolher a versão do postgres que se sentir mais confortável.
 
