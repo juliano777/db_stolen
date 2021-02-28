@@ -34,6 +34,13 @@
 
 ## Considerações finais e insights
 
+Pelos gráficos nota-se que o cenário 2, que tem bem menos registros obteve os melhores resultados.  
+Essa diferença de resultados entre o cenário 2  e o cenário 1 se acentuou por conta da quantidade de registros de cada um, o que
+no cenário 1, que tem mais registros, para operações de ordenação teve um *overhead* muito maior e exigindo mais memória, destacando-se o parâmetro `work_mem`.  
+Seus resultados de uma forma lógica foram melhores quando os parâmetros de configuração do PostgreSQL foram ajustados justamente para obter uma maior performance.  
+Por outro lado, com menos registros, o cenário 2 sofreu mais com *deadlocks*, operações randômicas de transferências.  
+
+
 
 
 
