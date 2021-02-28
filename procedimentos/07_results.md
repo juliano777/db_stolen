@@ -1,6 +1,6 @@
 [**[Home]**](../README.md "Página inicial") - 
 [**<**](06_tests.md "Testes")
-[**>**]()
+[**>**](08_conclusion.md "Conclusão")
 
 ---
 
@@ -119,13 +119,13 @@ Connection to 192.168.56.2 closed by remote host.
 pgbench -h localhost -p 5432 -U postgres -f test.sql -c 200 db_stone -t 10
 ```
 
-tps = 2026.820860
+tps = 2284.838823
 
 **[$]** pgbench, 300 conexões, 10 transações:
 ```bash
 pgbench -h localhost -p 5432 -U postgres -f test.sql -c 300 db_stone -t 10
 ```
-tps = 2284.838823
+tps = 2026.820860
 
 Último limite de centena seguro.
 
@@ -157,14 +157,15 @@ tps = 3202.123776
 ```bash
 pgbench -h localhost -p 6432 -U postgres -f test.sql -c 300 db_stone -t 10
 ```
-tps = 4393.291349
 
+tps = 4479.754539
 
 **[$]** pgbench, 500 conexões, 10 transações:
 ```bash
 pgbench -h localhost -p 6432 -U postgres -f test.sql -c 500 db_stone -t 10
 ```
-tps = 4479.754539
+
+tps = 4393.291349
 
 **[$]** pgbench, 500 conexões, 10 minutos:
 ```bash
@@ -179,4 +180,4 @@ tps = 2274.704638
 
 [**[Home]**](../README.md "Página inicial") - 
 [**<**](06_tests.md "Testes")
-[**>**]()
+[**>**](08_conclusion.md "Conclusão")
